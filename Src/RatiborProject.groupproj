@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1644D935-AB5E-4D03-88DF-C14A9E3BFE0C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="RatiborLib\RatiborLib.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RatiborInjector\RatiborInjector.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RatiborLib">
+        <MSBuild Projects="RatiborLib\RatiborLib.dproj"/>
+    </Target>
+    <Target Name="RatiborLib:Clean">
+        <MSBuild Projects="RatiborLib\RatiborLib.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RatiborLib:Make">
+        <MSBuild Projects="RatiborLib\RatiborLib.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RatiborInjector">
+        <MSBuild Projects="RatiborInjector\RatiborInjector.dproj"/>
+    </Target>
+    <Target Name="RatiborInjector:Clean">
+        <MSBuild Projects="RatiborInjector\RatiborInjector.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RatiborInjector:Make">
+        <MSBuild Projects="RatiborInjector\RatiborInjector.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RatiborLib;RatiborInjector"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RatiborLib:Clean;RatiborInjector:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RatiborLib:Make;RatiborInjector:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
